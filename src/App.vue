@@ -1,26 +1,30 @@
 <template>
   <div id="app">
     <h1>Tarefas</h1>
+    <task-progress :progress="progress" />
     <add-task @taskAdded="addTask" />
 
-    <taskGrid :tasks="tasks" />
+    <taskGrid
+      @taskStateChange="toggleState"
+      @taskDeleted="deleteTask"
+      :tasks="tasks"
+    />
   </div>
 </template>
 
 <script>
 import AddTask from "./components/add-task.vue";
 import taskGrid from "./components/task-grid.vue";
+import taskProgress from "./components/task-progress.vue";
 export default {
   components: {
     taskGrid,
     AddTask,
+    taskProgress,
   },
   data() {
     return {
-      tasks: [
-        { name: "Lavar louça", pending: false },
-        { name: "Comprar roupa", pending: true },
-      ],
+      tasks: [],
     };
   },
 
@@ -35,6 +39,37 @@ export default {
         });
       }
     },
+
+    deleteTask(i) {
+      this.tasks.splice(i, 1);
+    },
+
+    toggleState(i) {
+      this.tasks[i].pending = !this.tasks[i].pending;
+    },
+  },
+
+  computed: {
+    progress() {
+      const total = this.tasks.length;
+      const done = this.tasks.filter((t) => !t.pending).length;
+      return Math.round((done / total) * 100) || 0;
+    },
+  },
+
+  watch: {
+    tasks: {
+      deep: true,
+      handler() {
+        localStorage.setItem("tasks", JSON.stringify(this.tasks));
+      },
+    },
+  },
+
+  created() {
+    const json = localStorage.getItem("tasks");
+    const array = JSON.parse(json);
+    this.tasks = Array.isArray(array) ? array : [];
   },
 };
 </script>
