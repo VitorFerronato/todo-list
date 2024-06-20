@@ -1,11 +1,11 @@
 # ToDo-list-vue
+![image](https://user-images.githubusercontent.com/94748997/201988686-94c08973-208b-4ff8-873e-361af18a66f0.png)
 
- ## 💻 Projeto 
-   O projeto é um app de tarefas simples, você pode adicionar marcar como feita e excluir tarefas, também, a barra de progresso é definida dinâmicamente dependendo de quantas tarefas estão feitas.
-  As tarefas ficam armazenadas no localStorage do navegador
+ ## 💻 The project 
+   The project is a simple task app, you can add mark as done and delete tasks, also, the progress bar is set dynamically depending on how many tasks are done. Tasks are stored in the browser's localStorage.
 
-## 🚀 Tecnologias utilizadas
+## 🚀 Technologies
 * Vue
 * javascript
  
-![image](https://user-images.githubusercontent.com/94748997/201988686-94c08973-208b-4ff8-873e-361af18a66f0.png)
+
